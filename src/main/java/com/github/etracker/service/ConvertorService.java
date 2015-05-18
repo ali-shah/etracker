@@ -5,7 +5,7 @@
  */
 package com.github.etracker.service;
 
-import com.github.etracker.model.LocationAndTime;
+import com.github.etracker.LocationAndTime;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,13 +13,16 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import nz.co.eroad.domain.TimeZoneMapper;
+import com.github.etracker.TimeZoneMapper;
 
 /**
  *
  * @author Ali
  */
 public class ConvertorService {
+
+    public ConvertorService() {
+    }
     
     public void update(LocationAndTime data) {
         double lat = data.getLat();

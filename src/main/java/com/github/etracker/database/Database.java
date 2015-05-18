@@ -5,24 +5,17 @@
  */
 package com.github.etracker.database;
 
-import com.github.etracker.model.Message;
-import com.github.etracker.model.Profile;
-import java.util.HashMap;
-import java.util.Map;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
  * @author Ali
  */
 public class Database {
-    private static Map<Long, Message> messages = new HashMap<>();
-    private static Map<Long, Profile> profiles = new HashMap<>();
+    private static SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
     
-    public static Map<Long,Message> getMessages() {
-        return messages;
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
-    public static Map<Long,Profile> getProfiles(){
-        return profiles;
-    }
-    
 }

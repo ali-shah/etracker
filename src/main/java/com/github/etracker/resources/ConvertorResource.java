@@ -5,13 +5,11 @@
  */
 package com.github.etracker.resources;
 
-import com.github.etracker.model.LocationAndTime;
+import com.github.etracker.LocationAndTime;
 import com.github.etracker.service.ConvertorService;
-import java.util.Date;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -21,7 +19,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/convertor")
 public class ConvertorResource {
-    ConvertorService convertorService = new ConvertorService();
+    private ConvertorService convertorService = new ConvertorService();
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

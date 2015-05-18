@@ -1,4 +1,4 @@
-package nz.co.eroad.domain;
+package com.github.etracker;
 
 public class TimeZoneMapper {
 

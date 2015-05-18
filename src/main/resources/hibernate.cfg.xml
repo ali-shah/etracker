@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/etracker?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">rescue12</property>
+    <property name="connection.pool_size">1</property>
+    <!--disable second level caching -->
+    <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+    <!-- echo all sql to console -->
+    <property name="show_sql">true</property>
+    <!--<property name="format_sql">true</property>-->
+    <!-- drop and recreate schema on startup -->
+    <property name="hbm2ddl.auto">update</property>
+    <!-- Enable Hibernate's automatic session context management -->
+    <property name="current_session_context_class">thread</property>
+    <!-- name the annotated entity classes -->
+    <mapping class="com.github.etracker.model.Driver"/>
+    <mapping class="com.github.etracker.model.Vehicle"/>
+  </session-factory>
+</hibernate-configuration>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.etracker.model;
+package com.github.etracker;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
