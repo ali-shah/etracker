@@ -13,6 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -26,22 +27,25 @@ public class VehicleResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<TrackingInfo> getAllVehicles() {
-        return service.getAllVehicles();
+        List<TrackingInfo> allVehicles = service.getAllVehicles();
+        return allVehicles;
+//         return Response.ok(allVehicles).build(); //200
+//			.header("Access-Control-Allow-Origin", "*")
+//			.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+//			.allow("OPTIONS").build();
     }
     
     @GET
     @Path("/{vehicleRego}")
     @Produces(MediaType.APPLICATION_JSON)
     public TrackingInfo getVehicle(@PathParam("vehicleRego") String rego) {
-        return service.getVehicle(rego);
-//        TrackingInfo ti = new TrackingInfo();
-//            ti.setCity("auckland");
-//            ti.setDriverName("James");
-//            ti.setLangitude(-44.000);
-//            ti.setLatitude(-35.0000);
-//            ti.setTimezone("Auckland/Pacific");
-//            ti.setVehicleRego("DUC356");
-//        return ti;
+        TrackingInfo ti =  service.getVehicle(rego);
+        return ti;
+//        return Response.ok() //200
+//			.entity(ti)
+//			.header("Access-Control-Allow-Origin", "*")
+//			.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+//			.allow("OPTIONS").build();
     }
 
 }

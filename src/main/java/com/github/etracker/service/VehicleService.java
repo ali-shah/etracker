@@ -22,7 +22,6 @@ import org.hibernate.SessionFactory;
 public class VehicleService {
     private SessionFactory sessionFactory = Database.getSessionFactory();
     
-    
     public VehicleService() {
     }
        
@@ -36,12 +35,7 @@ public class VehicleService {
         session.close();
         for(Vehicle vehicle : vehicles) {
             TrackingInfo ti = new TrackingInfo();
-            ti.setCity(vehicle.getLocation().getCity());
-            ti.setDriverName(vehicle.getDriver().getFirstName());
-            ti.setLangitude(vehicle.getLocation().getLangitude());
-            ti.setLatitude(vehicle.getLocation().getLatitude());
-            ti.setTimezone(vehicle.getLocation().getTimezone());
-            ti.setVehicleRego(vehicle.getRego());
+            updateTrackingInfo(ti, vehicle);
             trackingDetails.add(ti);
         }
         return trackingDetails;
@@ -58,12 +52,7 @@ public class VehicleService {
         session.close();
         for(Vehicle vehicle : vehicles) {
             TrackingInfo ti = new TrackingInfo();
-            ti.setCity(vehicle.getLocation().getCity());
-            ti.setDriverName(vehicle.getDriver().getFirstName());
-            ti.setLangitude(vehicle.getLocation().getLangitude());
-            ti.setLatitude(vehicle.getLocation().getLatitude());
-            ti.setTimezone(vehicle.getLocation().getTimezone());
-            ti.setVehicleRego(vehicle.getRego());
+            updateTrackingInfo(ti, vehicle);
             trackingDetails.add(ti);
         }
         TrackingInfo info = new TrackingInfo();
@@ -71,7 +60,16 @@ public class VehicleService {
         while(iter.hasNext()) {
             info = iter.next();
         }
-        return info;
+        return info.getTimezone()==null? null: info;
+    }
+
+    private void updateTrackingInfo(TrackingInfo ti, Vehicle vehicle) {
+            ti.setCity(vehicle.getLocation().getCity());
+            ti.setDriverName(vehicle.getDriver().getFirstName());
+            ti.setLangitude(vehicle.getLocation().getLangitude());
+            ti.setLatitude(vehicle.getLocation().getLatitude());
+            ti.setTimezone(vehicle.getLocation().getTimezone());
+            ti.setVehicleRego(vehicle.getRego());
     }
     
 }
