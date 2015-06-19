@@ -30,8 +30,10 @@ public class VehicleResource {
     @Produces(MediaType.APPLICATION_JSON)
     public VehicleResponse getVehicle(@PathParam("vehicleRego") String rego, @Context UriInfo uriInfo) {
         VehicleResponse response = service.getVehicle(rego);
-        response.addLink(getUriForSelf(uriInfo, response), "self");
-        response.addLink(getUriForDriver(uriInfo, response), "driver");
+        if(response!= null) {
+            response.addLink(getUriForSelf(uriInfo, response), "self");
+            response.addLink(getUriForDriver(uriInfo, response), "driver");
+        }
         return response;
     }
 

@@ -37,12 +37,12 @@ public class VehicleService {
             updateTrackingInfo(res, vehicle);
             trackingDetails.add(res);
         }
-        VehicleResponse info = new VehicleResponse();
+        VehicleResponse res = new VehicleResponse();
         Iterator<VehicleResponse> iter = trackingDetails.iterator();
         while(iter.hasNext()) {
-            info = iter.next();
+            res = iter.next();
         }
-        return info.getTimezone()==null? null: info;
+        return res.getTimezone()==null? null: res;
     }
     
     private void updateTrackingInfo(VehicleResponse ti, Vehicle vehicle) {
