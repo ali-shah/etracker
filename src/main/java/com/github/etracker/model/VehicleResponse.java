@@ -1,15 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.github.etracker;
+package com.github.etracker.model;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Ali
  */
-public class TrackingInfo {
+public class VehicleResponse {
     
     private String driverName;
     private String timezone;
@@ -17,7 +15,25 @@ public class TrackingInfo {
     private String city;
     private double latitude;
     private double langitude;
+    private List<Link> links;
 
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
+    public void addLink(String url, String rel) {
+       if(links == null) {
+           links = new ArrayList<>();
+       }
+       Link link = new Link();
+       link.setLink(url);
+       link.setRel(rel);
+       links.add(link); 
+    }
     public String getDriverName() {
         return driverName;
     }

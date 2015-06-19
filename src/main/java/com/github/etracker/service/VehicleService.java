@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.etracker.service;
 
 import com.github.etracker.database.Database;
-import com.github.etracker.TrackingInfo;
+import com.github.etracker.model.VehicleResponse;
 import com.github.etracker.model.Vehicle;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 /**
@@ -25,45 +18,34 @@ public class VehicleService {
     public VehicleService() {
     }
        
-    public List<TrackingInfo> getAllVehicles() {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Query query = session.getNamedQuery("Vehicle.findAll");
-        List<Vehicle> vehicles = (List<Vehicle>) query.list();
-        List<TrackingInfo> trackingDetails = new ArrayList<>();
-        session.getTransaction().commit();
-        session.close();
+    public List<VehicleResponse> getAllVehicles() {
+        List<Vehicle> vehicles = Helper.getQueryResultSet(sessionFactory,"Vehicle.findAll","","");
+        List<VehicleResponse> trackingDetails = new ArrayList<>();
         for(Vehicle vehicle : vehicles) {
-            TrackingInfo ti = new TrackingInfo();
-            updateTrackingInfo(ti, vehicle);
-            trackingDetails.add(ti);
+            VehicleResponse res = new VehicleResponse();
+            updateTrackingInfo(res, vehicle);
+            trackingDetails.add(res);
         }
         return trackingDetails;
     }
     
-    public TrackingInfo getVehicle(String rego) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Query query = session.getNamedQuery("Vehicle.findByRego");
-        query.setString("rego", rego);
-        List<Vehicle> vehicles = (List<Vehicle>) query.list();
-        List<TrackingInfo> trackingDetails = new ArrayList<>();
-        session.getTransaction().commit();
-        session.close();
+    public VehicleResponse getVehicle(String rego) {
+        List<Vehicle> vehicles = Helper.getQueryResultSet(sessionFactory, "Vehicle.findByRego","rego",rego);
+        List<VehicleResponse> trackingDetails = new ArrayList<>();
         for(Vehicle vehicle : vehicles) {
-            TrackingInfo ti = new TrackingInfo();
-            updateTrackingInfo(ti, vehicle);
-            trackingDetails.add(ti);
+            VehicleResponse res = new VehicleResponse();
+            updateTrackingInfo(res, vehicle);
+            trackingDetails.add(res);
         }
-        TrackingInfo info = new TrackingInfo();
-        Iterator<TrackingInfo> iter = trackingDetails.iterator();
+        VehicleResponse info = new VehicleResponse();
+        Iterator<VehicleResponse> iter = trackingDetails.iterator();
         while(iter.hasNext()) {
             info = iter.next();
         }
         return info.getTimezone()==null? null: info;
     }
-
-    private void updateTrackingInfo(TrackingInfo ti, Vehicle vehicle) {
+    
+    private void updateTrackingInfo(VehicleResponse ti, Vehicle vehicle) {
             ti.setCity(vehicle.getLocation().getCity());
             ti.setDriverName(vehicle.getDriver().getFirstName());
             ti.setLangitude(vehicle.getLocation().getLangitude());

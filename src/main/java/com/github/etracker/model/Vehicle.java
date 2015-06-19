@@ -6,6 +6,8 @@
 package com.github.etracker.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.ws.rs.core.Link;
+import javax.ws.rs.core.Link.Builder;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -21,6 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="vehicle")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vehicle.findAll", query = "SELECT v FROM Vehicle v"),
     @NamedQuery(name = "Vehicle.findByVehicleId", query = "SELECT c FROM Vehicle c WHERE c.id = :vehicleId"),
@@ -34,7 +40,7 @@ import javax.persistence.Table;
     private Location location;
     @OneToOne(fetch = FetchType.EAGER)
     private Driver driver;
-
+    
     public Driver getDriver() {
         return driver;
     }
