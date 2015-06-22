@@ -1,4 +1,4 @@
-app.controller('MainController', function ($scope, Vehicle) {
+app.controller('AngularJSController', function ($scope, Vehicle) {
     $scope.map;
     var markers = [];
     function initialize() {
@@ -8,7 +8,7 @@ app.controller('MainController', function ($scope, Vehicle) {
             center: centerPoint,
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
-        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        $scope.map = new google.maps.Map(document.getElementById('mymap'), mapOptions);
     }
     function deleteMarkers() {
         clearMarkers();
